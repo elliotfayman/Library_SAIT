@@ -1,0 +1,42 @@
+<%= link_to "Back", '/main/bookList' , class: 'btn btn-default navbar-btn', :method => :get %>
+
+
+<center>
+<h1>Regestered Users</h1>
+<style type="text/css">
+.tg  {border-collapse:collapse;border-color:#C44D58;border-spacing:0;border-style:solid;border-width:1px;}
+.tg td{background-color:#F9CDAD;border-color:#C44D58;border-style:solid;border-width:0px;color:#002b36;
+  font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{background-color:#FE4365;border-color:#C44D58;border-style:solid;border-width:0px;color:#fdf6e3;
+  font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-brdm{background-color:#FFA4A0;border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-bw1t{background-color:#FFA4A0;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"> User Emails</th>
+    <th class="tg-0lax"> Books Checked Out</th>
+  </tr>
+</thead>
+<tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td class="tg-brdm"><%=u.email %></td>
+      <% bl = "" %>
+  <% if u.books.empty? %>
+    <% bl = "No Books checked out" %>
+  <% else %>
+    <% u.books.each do |b| %>
+      <%bl += b.title + ", "%>
+    <% end %>
+    <% bl = bl[0...-2] %>
+  <% end %>
+        <td class="tg-bw1t"><%= bl %></td>
+      </tr>
+    <% end %>
+</tbody>
+</table>
+</center>

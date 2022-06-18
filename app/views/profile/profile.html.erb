@@ -1,0 +1,70 @@
+<style>
+body { padding-top: 50px; }
+</style>
+
+
+<body>
+  <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/home/index">Library</a>
+          </div>
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#"> <%=current_user.email %></a></li>
+              <% if(!user_signed_in?) %>
+              <li><a href="/users/sign_in">Log In</a></li>
+              <% if can? :read, User %>
+                <li><a href="/admin_p/adminP">Admin</a></li>
+              <% end %>
+              <% else %>
+              <li><a href='/main/bookList'> Home</a></li>
+              <% if can? :read, User %>
+                <li><a href="/checkout/checkout"> Checkout </a></li>
+                <li><a style="margin-right: 35em" href="/admin_p/adminP">Admin</a></li>
+              <% else %>
+                <li><a style="margin-right: 35em" href="/checkout/checkout"> Checkout </a></li>
+              <% end %>
+              <%= link_to 'Sign out', destroy_user_session_path, :method => :delete %>
+              <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+
+      <% bookQueue = current_user.books %> 
+      <% book_string = "" %>
+      <% if bookQueue.empty? %> 
+        <% book_string =  "No Books Checked Out" %>
+      <% else %> 
+        <% bookQueue.each do |b| %>
+          <% if b.checked_out %>
+            <% book_string += b.title + ", " %>
+          <% end %>
+        <% end %>
+        <% book_string = book_string[0...-2] %>
+      <% end %>
+
+  <h1>Hello <%= current_user.first + " " + current_user.last %></h1>
+
+  <ul class="list-group">
+    <li class="list-group-item">Email: <%= current_user.email %></li>
+    <li class="list-group-item">State: <%= current_user.state %></li></li>
+    <li class="list-group-item">City: <%= current_user.city %></li></li>
+    <li class="list-group-item">Adress: <%= current_user.adress %></li></li>
+    <li class="list-group-item">Phone: <%= current_user.phone %></li></li>
+    <li class="list-group-item">Books Checked Out: <%= book_string %></li>
+    
+  </ul>
+  <center>
+  <%= button_to "Return Books", {:action => 'exec'}, :class=>"btn btn-lg btn-primary btn-block", :confirm => "Return these Books?" %>
+  </center>
+
+</body>

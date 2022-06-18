@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="/assets/bookIcon.png">
+  <title>Library</title>
+
+  
+  <%= stylesheet_link_tag "application", :media => "all" %>
+  
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% flash.each do |type, msg| %>
+  <div class="alert alert-warning alert-dismissable">
+  <a href='/home/index' class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong><%= notice %></strong>
+  </div>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+
+<script>
+<% stateKey = CS.states(:us).keys %>
+<% stateValues = CS.states(:us).values %>
+<% stateHash = CS.states(:us) %>
+<% @citystatehash = {} %>
+<% stateKey.each {|k| @citystatehash[stateHash[k]] = CS.cities(k, :us)} %>
+var citiesByState = JSON.parse('<%= raw(j @citystatehash.to_json) %>');
+
+console.log("citiesByState");
+console.log(citiesByState);
+
+function makeSubmenu(value) {
+if(value.length==0) document.getElementById("citySelect").innerHTML = "<option></option>";
+else {
+var citiesOptions = "";
+for(cityId in citiesByState[value]) {
+citiesOptions+="<option>"+citiesByState[value][cityId]+"</option>";
+}
+document.getElementById("citySelect").innerHTML = citiesOptions;
+}
+}
+function displaySelected() { var country = document.getElementById("countrySelect").value;
+var city = document.getElementById("citySelect").value;
+alert(country+"\n"+city);
+}
+function resetSelection() {
+document.getElementById("countrySelect").selectedIndex = 0;
+document.getElementById("citySelect").selectedIndex = 0;
+}
+</script>
+
+
+
+<body onload="resetSelection()">
+<%= f.select :state, options_for_select(CS.states(:us)), {:prompt => "State"}, {:class => "form-control", :id => "countrySelect", :size=>"1", :onchange=>"makeSubmenu(this.value)" } %>
+<%= f.select :city, options_for_select([]),{:prompt => "City"}, {:class => "form-control", :id => "citySelect"} %>
+
+
+</body>

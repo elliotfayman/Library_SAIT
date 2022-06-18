@@ -1,0 +1,47 @@
+<style>
+  .block{
+    width: 25%;
+  }
+</style>
+
+<%= link_to "Back", '/main/bookList' , class: 'btn btn-default navbar-btn', :method => :get %>
+
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"> <h4> <center> <b> <%=  @book.title %> </b> </center> <h4> </div>
+
+  <!-- Table -->
+  <table class="table">
+  <tbody>
+    <tr>
+      <th>Author</th>
+      <td><%= @book.author %></th>
+    </tr>
+    <tr>
+      <th>Published Date</td>
+      <td><%= @book.published %></td>
+    </tr>
+    <tr>
+      <th>Book ISBN</td>
+      <td><%= @book.book_id %></td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+<center>
+  <div class="block">
+<% if user_signed_in? %>
+<h3 class="form-signin-heading">Check out</h3>
+    <%= form_for @book, :url => {:action => 'update', :id => @book.id}, class: "form-signin" do |f| %>
+        <%= f.date_select(:checkindate, :start_year => 2022,  :class => "form-control") %>
+        <br>
+        <br>
+        <%= f.submit "Send to Cart", :class=>"btn btn-lg btn-primary btn-block", :confirm => "Send this Book to The Cart?" %>
+    <% end %>
+<% else %>
+        <p> Please Sign In to Check Out Book </p>
+<% end %>
+    </div>
+</center>
