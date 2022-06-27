@@ -16,6 +16,7 @@ rails s
 ```
 
 ## Home Page
+This page contains all the available and unavailable books. Books that can be checked out will be highlighted green while those that cannot are highlighted red. Each book that is unavailable will also list a time by which the book will become available. If the user is signed in, the user can click on an availible book to review more details relating to the book with the exteded option to check out. If the user is not signed in, then the user will be prompted to sign in before having the ability to check out the book. 
 
 ## Checkout Book
 
