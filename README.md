@@ -22,5 +22,6 @@ This page contains all the available and unavailable books. Books that can be ch
 This page displays any books that the signed in user has decided to check out. When the user clicks the checkout button, a sidekiq job is scheduled on the day the user reported they would check the book back in. If the user does not prematurly check the book back in, the book will be checked back in automaticly allowing for other users to check the book out as soon as possible. 
 
 ## Sign in/Sign up
+The sign in page utilizes the devise gem in order to create password secure users. The devise veiw template was modified in order to include additional feilds including a state & city select box. This select feild can automaticly filter the cities based on what was selected in the states feild. This was implimented using some javascript in combination to the city-state gem. Once a user has created an account, they will be prompted to confirm their email. This confirmation is sent to the users email but is imediatly displayed using the letter_opener gem. After confirming their account, the user can sign in freely. 
 
 ## Admin Page
