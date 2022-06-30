@@ -10,6 +10,7 @@ Run the following commands in your terminal:
 
 ```
 git clone https://github.com/elliotfayman/Library_SAIT/edit/master/README.rdoc
+db rake:create
 db rake:migrate
 redis-server
 sidekiq
