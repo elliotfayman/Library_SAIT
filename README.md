@@ -1,6 +1,6 @@
 # Welcome to my Library Project!! 
 
-This project was created in fullfilment of the intern project given to SAIT student web developers. 
+This project was created in fullfilment of the intern project given to SAIT student web developers. It utilizes a MYSQL database along with several ruby gems such as devise, mail_opener, rspec, and more!
 
 ---
 
